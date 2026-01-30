@@ -117,7 +117,7 @@ func DebugEvent(e *event.Event) (s string) {
 		t := time.UnixMilli(int64(epochMilli))
 		s += fmt.Sprintf(" %s", t.Format(time.RFC3339Nano))
 	}
-	s += fmt.Sprintf("\nid:%s", e.GetID())
+	s += fmt.Sprintf("\nid:%s", event.Key(e.GetID()))
 	if channel := e.GetChannel(); channel != "" {
 		s += fmt.Sprintf(" (channel:%s)", channel)
 	}
