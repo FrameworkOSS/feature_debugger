@@ -5,8 +5,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/FrameworkOSS/portal/features/commands/handler"
-	"github.com/FrameworkOSS/portal/portal"
+	"github.com/FrameworkOSS/event"
+	"github.com/FrameworkOSS/feature_commands/handler"
+	"github.com/FrameworkOSS/portal"
 )
 
 type Debugger struct {
@@ -61,16 +62,16 @@ func (dbg *Debugger) Close() (errs []error, retry bool) {
 	return
 }
 
-func (dbg *Debugger) Input(e *portal.Event) error {
+func (dbg *Debugger) Input(e *event.Event) error {
 	dbg.debug(e)
 	return nil
 }
 
-func (dbg *Debugger) Output() (*portal.Event, error) {
+func (dbg *Debugger) Output() (*event.Event, error) {
 	return nil, nil
 }
 
-func (dbg *Debugger) debug(e *portal.Event) {
+func (dbg *Debugger) debug(e *event.Event) {
 	if dbg.exclude != nil {
 		for _, v := range dbg.exclude {
 			if e.GetID() == v {
@@ -110,7 +111,7 @@ func (dbg *Debugger) Exclude(events ...string) *Debugger {
 }
 
 // DebugEvent returns a string formatting of an event.
-func DebugEvent(e *portal.Event) (s string) {
+func DebugEvent(e *event.Event) (s string) {
 	s += "<<<< portal:" + e.GetPortal() + " producer:" + e.GetProducer() + " >>>>"
 	if epochMilli := e.GetEpochMilli(); epochMilli > 0 {
 		t := time.UnixMilli(int64(epochMilli))
