@@ -3,10 +3,12 @@ package debugger
 import (
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/FrameworkOSS/event"
 	"github.com/FrameworkOSS/feature_commands/handler"
+	"github.com/FrameworkOSS/feature_debugger/metadata"
 	"github.com/FrameworkOSS/portal"
 )
 
@@ -23,27 +25,27 @@ func NewDebugger(p *portal.Portal) (dbg *Debugger) {
 }
 
 func (dbg *Debugger) API() int {
-	return 0
+	return metadata.API
 }
 
 func (dbg *Debugger) ID() string {
-	return "debugger"
+	return metadata.ID
 }
 
 func (dbg *Debugger) Name() string {
-	return "Debugger"
+	return metadata.Name
 }
 
 func (dbg *Debugger) Authors() []string {
-	return []string{"JoshuaDoes"}
+	return strings.Split(metadata.Authors, ",")
 }
 
 func (dbg *Debugger) Description() string {
-	return "Logs all incoming events to stdout, but errors to stderr."
+	return metadata.Description
 }
 
 func (dbg *Debugger) Version() string {
-	return "v0.0.1"
+	return metadata.Version
 }
 
 func (dbg *Debugger) Open() error {
