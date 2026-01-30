@@ -149,7 +149,7 @@ func DebugEvent(e *event.Event) (s string) {
 					s += fmt.Sprintf("0x%X", arg.GetValueBytes())
 				}
 			}
-		case "resp", "error":
+		case event.EVENT_RESPONSE, event.EVENT_ERROR:
 			s += string(data)
 		default:
 			s += fmt.Sprintf("0x%X\n===\n%s", data, string(data))
